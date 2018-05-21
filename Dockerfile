@@ -13,7 +13,7 @@ RUN wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Cen
 # 安装常用软件
 RUN yum clean all
 RUN yum install -y yum-plugin-ovl || true
-RUN yum install -y vim tar wget curl rsync bzip2 iptables tcpdump less telnet net-tools lsof sysstat cronie passwd openssl openssh-server kde-l10n-Chinese reinstall glibc-common
+RUN yum install -y vim tar wget curl rsync bzip2 iptables tcpdump less telnet net-tools lsof sysstat cronie passwd openssl openssh-server kde-l10n-Chinese glibc-common
 
 # 安装openjdk1.8
 RUN yum remove java* -y
@@ -23,4 +23,6 @@ RUN yum install java-1.8.0-openjdk* -y
 RUN yum clean all
 RUN rm -rf /var/cache/yum/*
 
-ENV LC_ALL "zh_CN.UTF-8"
+# 中文设置
+ENV LANG="zh_CN.UTF-8" 
+RUN echo "export LC_ALL=zh_CN.UTF-8"  >>  /etc/profile
